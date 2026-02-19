@@ -3,6 +3,7 @@ function Book(name, author, genre) {
     this.name = name;
     this.author = author;
     this.genre = genre;
+    this.status = 'X';
 }
 
 const myLibrary = [];
@@ -35,10 +36,12 @@ function showLibrary() {
             <td>${book.name}</td>
             <td>${book.author}</td>
             <td>${book.genre}</td>
+            <td><button class="status">${book.status}</button></td>
         `;
 
-        // attach the delete listener to the new button
+        // attach the listeners to the new buttons
         tableRow.querySelector('.remove-btn').addEventListener('click', removeBook);
+        tableRow.querySelector('.status').addEventListener('click', updateBookStatus);
 
         tableBody.appendChild(tableRow);
     }
@@ -55,6 +58,25 @@ function removeBook(e) {
         const idx = myLibrary.findIndex(book => book.id === id);
         if (idx !== -1) myLibrary.splice(idx, 1);
         row.remove();
+    }
+    console.log(myLibrary);
+}
+
+function updateBookStatus(e) {
+    const row = e.currentTarget.closest('tr');
+    if (!row) return;
+
+    const id = row.querySelector('.book-id').textContent;
+    const book = myLibrary.find(book => book.id === id);
+    const statusCell = row.querySelector('.status');
+
+    if (book) {
+        // toggle status
+        const newStatus = book.status === 'X' ? 'V' : 'X';
+        
+        // update both the data and the UI
+        book.status = newStatus;
+        statusCell.textContent = newStatus;
     }
 }
 

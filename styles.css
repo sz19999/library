@@ -30,7 +30,7 @@ table button {
     width: 21px;
 }
 
-td:nth-child(5n + 1), th:first-of-type {
+td:nth-child(6n + 1), th:first-of-type {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -90,4 +90,13 @@ form button:active {
 
 button:hover {
     cursor: pointer;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.status:hover {
+    color: red;
+    font-size: 1.1rem;
 }
